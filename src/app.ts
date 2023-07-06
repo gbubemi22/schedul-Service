@@ -10,7 +10,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
-import helmet from "helmet";
+//import helmet from "helmet";
 const rateLimitPromise = import("express-rate-limit");
 import xss from "xss-clean";
 
@@ -46,7 +46,7 @@ const applyRateLimiter = async (
 };
 app.use(xss());
 app.use(applyRateLimiter);
-app.use(helmet());
+//app.use(helmet());
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to NoemDek App" });
