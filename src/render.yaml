@@ -1,0 +1,5 @@
+name: SChedule
+type: web
+buildCommand: tsc --project tsconfig.json
+startCommand: node dist/app.js 
+directory: src
