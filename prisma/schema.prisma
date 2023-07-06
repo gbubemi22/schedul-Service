@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Type {
+  USER
+  ADMIN
+  DRIVER
+  CUSTOMER
+}
+
+model Admin {
+  id            String     @id @unique @default(uuid())
+  full_name     String
+  email         String     @unique
+  number        String
+  password      String
+  type          Type       @default(ADMIN)
+  schedules     Schedule[]
+  createdAt     DateTime   @default(now())
+  date_modified DateTime   @default(now()) @updatedAt
+}
+
+model Driver {
+  id            String     @id @unique @default(uuid())
+  full_name     String
+  email         String     @unique
+  number        String
+  password      String
+  type          Type
+  schedules     Schedule[]
+  createdAt     DateTime   @default(now())
+  date_modified DateTime   @default(now()) @updatedAt
+}
+
+model Vehicle {
+  id            String   @id @unique @default(uuid())
+  image         String
+  status        String
+  vehicle_name  String
+  vehicle_type  String
+  schedules     Schedule[]
+  createdAt     DateTime @default(now())
+  date_modified DateTime @default(now()) @updatedAt
+}
+
+model Schedule {
+  id              String   @id @unique @default(uuid())
+  service         String
+  cliant          String
+  start_Date      DateTime
+  end_Date        DateTime
+  pickuploaction  String
+  dropofflocation String
+  note            String
+  createdAt       DateTime @default(now())
+  date_modified   DateTime @default(now()) @updatedAt
+
+  driver      Driver  @relation(fields: [driverId], references: [id])
+  createdBy   String
+  editedBy    String
+  company     Company @relation(fields: [companyId], references: [id])
+  driverId    String
+  companyId   String
+  createdById String
+  editedById  String
+  vehicleId String
+
+  Vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
+
+  Admin Admin? @relation(fields: [adminId], references: [id])
+
+  adminId String?
+}
+
+model Company {
+  id            String     @id @unique @default(uuid())
+  company_name  String
+  schedules     Schedule[]
+  createdAt     DateTime   @default(now())
+  date_modified DateTime   @default(now()) @updatedAt
+}
