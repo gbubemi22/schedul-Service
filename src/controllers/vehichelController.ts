@@ -104,6 +104,10 @@ const vehicleController = {
       message: "Vehicle deleted successfully.",
     });
   },
+
+  add:async() {
+    
+  }
 };
 
 export default vehicleController;
