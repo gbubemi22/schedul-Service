@@ -7,12 +7,12 @@ const prisma_1 = __importDefault(require("../DB/prisma"));
 const http_status_codes_1 = require("http-status-codes");
 const password_1 = require("../utils/password");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const authValidation_1 = __importDefault(require("../helpers/authValidation"));
+const authValidation_1 = require("../helpers/authValidation");
 const passwordValidator_1 = __importDefault(require("../utils/passwordValidator"));
 // Resgister a driver 
 const adminAuthController = {
     createAdmin: async (req, res) => {
-        const { error } = authValidation_1.default.validate(req.body);
+        const { error } = authValidation_1.AdminSchema.validate(req.body);
         if (error) {
             return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
                 message: "Invalid request body",
@@ -45,7 +45,7 @@ const adminAuthController = {
         const hashedPassword = await (0, password_1.hashPassword)(password);
         // Create the user if password validation passes
         if (passwordValidationResult) {
-            const createdUser = await prisma_1.default.driver.create({
+            const createdUser = await prisma_1.default.admin.create({
                 data: {
                     full_name,
                     email,

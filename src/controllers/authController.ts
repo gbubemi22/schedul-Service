@@ -4,7 +4,7 @@ import prisma from "../DB/prisma";
 import { StatusCodes } from "http-status-codes";
 import { hashPassword, comparePassword } from "../utils/password";
 import jwt from "jsonwebtoken";
-import DriverSchema from "../helpers/authValidation";
+import {DriverSchema} from "../helpers/authValidation";
 import validatePasswordString from "../utils/passwordValidator";
 
 
@@ -84,7 +84,7 @@ const authController = {
 
     if (!user) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
-        message: "Invalid email or password",
+        message: "Invalid email or password 1" ,
       });
     }
 
@@ -92,7 +92,7 @@ const authController = {
 
     if (!isPasswordValid) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
-        message: "Invalid email or password",
+        message: "Invalid email or password 2",
       });
     }
 

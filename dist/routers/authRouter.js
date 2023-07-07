@@ -7,8 +7,11 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const authController_1 = __importDefault(require("../controllers/authController"));
 router
-    .route('/signup')
+    .route('/signup-driver')
     .post(authController_1.default.createDeriver);
+router
+    .route('/login-driver')
+    .post(authController_1.default.loginDriver);
 router
     .route('/logout')
     .get(authController_1.default.logoutUser);

@@ -4,14 +4,14 @@ import prisma from "../DB/prisma";
 import { StatusCodes } from "http-status-codes";
 import { hashPassword, comparePassword } from "../utils/password";
 import jwt from "jsonwebtoken";
-import DriverSchema from "../helpers/authValidation";
+import {AdminSchema} from "../helpers/authValidation";
 import validatePasswordString from "../utils/passwordValidator";
 
 
 // Resgister a driver 
 const adminAuthController = {
   createAdmin: async (req: Request, res: Response): Promise<Response> => {
-    const { error } = DriverSchema.validate(req.body);
+    const { error } = AdminSchema.validate(req.body);
 
     if (error) {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -50,7 +50,7 @@ const adminAuthController = {
 
     // Create the user if password validation passes
     if (passwordValidationResult) {
-      const createdUser = await prisma.driver.create({
+      const createdUser = await prisma.admin.create({
         data: {
           full_name,
           email,

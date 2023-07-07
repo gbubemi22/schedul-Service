@@ -7,8 +7,16 @@ const prisma_1 = __importDefault(require("../DB/prisma"));
 const http_status_codes_1 = require("http-status-codes");
 const scheduleController = {
     createSchedule: async (req, res) => {
-        const { service, cliant, start_Date, end_Date, pickuploaction, dropofflocation, note, adminId, driverId, companyId, createdById, editedById, vehicleId, } = req.body;
+        const { service, cliant, start_Date, end_Date, pickuploaction, dropofflocation, note, adminId, driverId, companyId, createdBy, editedBy, vehicleId, } = req.body;
         try {
+            const adminCheck = await prisma_1.default.admin.findUnique({
+                where: { id: adminId },
+            });
+            if (!adminCheck) {
+                return res
+                    .status(http_status_codes_1.StatusCodes.NOT_FOUND)
+                    .json({ message: `Admin not found` });
+            }
             const newSchedule = await prisma_1.default.schedule.create({
                 data: {
                     service,
@@ -19,19 +27,18 @@ const scheduleController = {
                     dropofflocation,
                     note,
                     adminId,
-                    vehicleId,
-                    driver: { connect: { id: driverId } },
-                    createdById,
-                    editedById,
-                    company: { connect: { id: companyId } },
-                    createdBy: createdById,
-                    editedBy: editedById,
-                    Vehicle: { connect: { id: vehicleId } },
+                    createdBy: adminCheck.full_name,
+                    editedBy: adminCheck.full_name,
+                    driverId: driverId,
+                    companyId: companyId,
+                    vehicleId: vehicleId,
                 },
             });
+            console.log(newSchedule);
             return res.status(http_status_codes_1.StatusCodes.CREATED).json(newSchedule);
         }
         catch (error) {
+            console.log(error);
             return res
                 .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
                 .json({ message: "Failed to create schedule" });
@@ -71,6 +78,7 @@ const scheduleController = {
             return res.status(http_status_codes_1.StatusCodes.OK).json(schedules);
         }
         catch (error) {
+            console.error(error);
             return res
                 .status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR)
                 .json({ message: "Failed to get schedules" });
@@ -101,8 +109,6 @@ const scheduleController = {
                     pickuploaction,
                     dropofflocation,
                     note,
-                    editedById: checkAdminId.id,
-                    createdById: checkAdminId.id,
                     driver: { connect: { id: driverId } },
                     company: { connect: { id: companyId } },
                 },
@@ -128,10 +134,10 @@ const scheduleController = {
         }
     },
     getSchedulesByVehicle: async (req, res) => {
-        const { vehicleId } = req.params;
+        const { id } = req.params;
         try {
             const schedules = await prisma_1.default.schedule.findMany({
-                where: { vehicleId: vehicleId },
+                where: { vehicleId: id },
                 include: { driver: true, company: true },
             });
             return res.status(http_status_codes_1.StatusCodes.OK).json(schedules);
@@ -143,10 +149,10 @@ const scheduleController = {
         }
     },
     getSchedulesByDriver: async (req, res) => {
-        const { driverId } = req.params;
+        const { id } = req.params;
         try {
             const schedules = await prisma_1.default.schedule.findMany({
-                where: { driverId: driverId },
+                where: { driverId: id },
                 include: { company: true },
             });
             return res.status(http_status_codes_1.StatusCodes.OK).json(schedules);

@@ -1,3 +1,3 @@
-import Joi from 'joi';
-declare const DriverSchema: Joi.ObjectSchema<any>;
-export default DriverSchema;
+import Joi from "joi";
+export declare const DriverSchema: Joi.ObjectSchema<any>;
+export declare const AdminSchema: Joi.ObjectSchema<any>;

@@ -16,7 +16,7 @@ router
 
 
 router
-.route('/:id')
+.route('/:companyId')
 .get(companyController.getOneCompany)
 .patch(companyController.updateCompany)
 .delete(companyController.deleteCompany)

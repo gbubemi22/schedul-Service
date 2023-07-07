@@ -10,6 +10,6 @@ router
     .route('/admin/signup')
     .post(adminController_1.default.createAdmin);
 router
-    .route('/login')
+    .route('/admin/login')
     .post(adminController_1.default.loginAdmin);
 exports.default = router;

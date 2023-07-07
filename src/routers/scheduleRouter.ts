@@ -18,7 +18,7 @@ router
 
 
 router
-.route('/:id')
+.route('/:scheduleId')
 .get(scheduleController.getSchedule)
 .patch(scheduleController.updateSchedule)
 .delete(scheduleController.deleteSchedule);

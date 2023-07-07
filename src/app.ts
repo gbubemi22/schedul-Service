@@ -17,7 +17,7 @@ import xss from "xss-clean";
 //import routes
 import AuthRouter from "./routers/authRouter";
 import VehicleRouter from "./routers/vehicleRouter";
-import CompanyRouter from "./routers/vehicleRouter";
+import CompanyRouter from "./routers/companyRouter";
 import AdminRouter from "./routers/adminAuthRouter";
 import FilterRouter from "./routers/fillterRouter";
 import ScheduleRouter from "./routers/scheduleRouter";

@@ -42,14 +42,14 @@ model Driver {
 }
 
 model Vehicle {
-  id            String   @id @unique @default(uuid())
+  id            String     @id @unique @default(uuid())
   image         String
   status        String
   vehicle_name  String
   vehicle_type  String
   schedules     Schedule[]
-  createdAt     DateTime @default(now())
-  date_modified DateTime @default(now()) @updatedAt
+  createdAt     DateTime   @default(now())
+  date_modified DateTime   @default(now()) @updatedAt
 }
 
 model Schedule {
@@ -64,19 +64,18 @@ model Schedule {
   createdAt       DateTime @default(now())
   date_modified   DateTime @default(now()) @updatedAt
 
-  driver      Driver  @relation(fields: [driverId], references: [id])
-  createdBy   String
-  editedBy    String
-  company     Company @relation(fields: [companyId], references: [id])
-  driverId    String
-  companyId   String
-  createdById String
-  editedById  String
+  driver    Driver  @relation(fields: [driverId], references: [id])
+  createdBy String
+  editedBy  String
+  company   Company @relation(fields: [companyId], references: [id])
+  driverId  String
+  companyId String
+
   vehicleId String
 
-  Vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
+  vehicle Vehicle? @relation(fields: [vehicleId], references: [id])
 
-  Admin Admin? @relation(fields: [adminId], references: [id])
+  admin Admin? @relation(fields: [adminId], references: [id])
 
   adminId String?
 }

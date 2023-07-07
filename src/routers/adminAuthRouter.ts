@@ -15,7 +15,7 @@ router
 
 
 router
-.route('/login')
+.route('/admin/login')
 .post(adminAuthController.loginAdmin)
 
 

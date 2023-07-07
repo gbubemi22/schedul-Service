@@ -11,7 +11,7 @@ router
     .post(schedulingController_1.default.createSchedule)
     .get(schedulingController_1.default.getAllSchedules);
 router
-    .route('/:id')
+    .route('/:scheduleId')
     .get(schedulingController_1.default.getSchedule)
     .patch(schedulingController_1.default.updateSchedule)
     .delete(schedulingController_1.default.deleteSchedule);

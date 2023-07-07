@@ -5,41 +5,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const prisma_1 = __importDefault(require("../DB/prisma"));
 const http_status_codes_1 = require("http-status-codes");
+const date_fns_1 = require("date-fns");
 const getSchedulesByDayWeekMonth = async (req, res) => {
-    const { day, week, month } = req.params;
+    const { day, week, month } = req.query;
     try {
         let schedules = [];
         if (day) {
+            const date = new Date(day);
             schedules = await prisma_1.default.schedule.findMany({
                 where: {
                     start_Date: {
-                        gte: new Date(day),
-                        lt: new Date(day),
+                        gte: date,
+                        lt: new Date(date),
                     },
                 },
-                include: { driver: true, company: true },
             });
         }
         else if (week) {
+            const startOfWeek = new Date(week);
+            const endOfWeek = (0, date_fns_1.addDays)(startOfWeek, 6);
             schedules = await prisma_1.default.schedule.findMany({
                 where: {
                     start_Date: {
-                        gte: new Date(week),
-                        lt: new Date(week),
+                        gte: startOfWeek,
+                        lt: endOfWeek,
                     },
                 },
-                include: { driver: true, company: true },
             });
         }
         else if (month) {
+            const startOfMonth = new Date(month);
+            const endOfMonth = (0, date_fns_1.addMonths)(startOfMonth, 1);
             schedules = await prisma_1.default.schedule.findMany({
                 where: {
                     start_Date: {
-                        gte: new Date(month),
-                        lt: new Date(month),
+                        gte: startOfMonth,
+                        lt: endOfMonth,
                     },
                 },
-                include: { driver: true, company: true },
             });
         }
         else {

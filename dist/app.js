@@ -35,13 +35,13 @@ const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const helmet_1 = __importDefault(require("helmet"));
+//import helmet from "helmet";
 const rateLimitPromise = Promise.resolve().then(() => __importStar(require("express-rate-limit")));
 const xss_clean_1 = __importDefault(require("xss-clean"));
 //import routes
 const authRouter_1 = __importDefault(require("./routers/authRouter"));
 const vehicleRouter_1 = __importDefault(require("./routers/vehicleRouter"));
-const vehicleRouter_2 = __importDefault(require("./routers/vehicleRouter"));
+const companyRouter_1 = __importDefault(require("./routers/companyRouter"));
 const adminAuthRouter_1 = __importDefault(require("./routers/adminAuthRouter"));
 const fillterRouter_1 = __importDefault(require("./routers/fillterRouter"));
 const scheduleRouter_1 = __importDefault(require("./routers/scheduleRouter"));
@@ -62,14 +62,14 @@ const applyRateLimiter = async (req, res, next) => {
 };
 app.use((0, xss_clean_1.default)());
 app.use(applyRateLimiter);
-app.use((0, helmet_1.default)());
+//app.use(helmet());
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to NoemDek App" });
 });
 // USE ROUTES
 app.use("/api/v1/auth", authRouter_1.default);
 app.use("/api/v1/vehicles", vehicleRouter_1.default);
-app.use("/api/v1/companies", vehicleRouter_2.default);
+app.use("/api/v1/companies", companyRouter_1.default);
 app.use("/api/v1/auth", adminAuthRouter_1.default);
 app.use("/api/v1/filter-schedule", fillterRouter_1.default);
 app.use("/api/v1/schedules", scheduleRouter_1.default);

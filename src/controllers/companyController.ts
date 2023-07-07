@@ -5,6 +5,9 @@ import { StatusCodes } from "http-status-codes";
 const companyController = {
   addCompany: async (req: Request, res: Response): Promise<Response> => {
     const { company_name } = req.body;
+    if(!req.body.company_name) {
+      return res.status(StatusCodes.BAD_REQUEST).json({message:`company name required`});
+    }
 
     const newCompany = await prisma.company.create({
       data: {

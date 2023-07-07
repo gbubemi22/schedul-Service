@@ -4,8 +4,13 @@ import authController from '../controllers/authController';
 
 
 router
-.route('/signup')
+.route('/signup-driver')
 .post(authController.createDeriver)
+
+
+router
+.route('/login-driver')
+.post(authController.loginDriver)
 
 
 router

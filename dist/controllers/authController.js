@@ -7,12 +7,12 @@ const prisma_1 = __importDefault(require("../DB/prisma"));
 const http_status_codes_1 = require("http-status-codes");
 const password_1 = require("../utils/password");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const authValidation_1 = __importDefault(require("../helpers/authValidation"));
+const authValidation_1 = require("../helpers/authValidation");
 const passwordValidator_1 = __importDefault(require("../utils/passwordValidator"));
 // Resgister a driver 
 const authController = {
     createDeriver: async (req, res) => {
-        const { error } = authValidation_1.default.validate(req.body);
+        const { error } = authValidation_1.DriverSchema.validate(req.body);
         if (error) {
             return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
                 message: "Invalid request body",
@@ -76,13 +76,13 @@ const authController = {
         const user = await prisma_1.default.driver.findUnique({ where: { email } });
         if (!user) {
             return res.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({
-                message: "Invalid email or password",
+                message: "Invalid email or password 1",
             });
         }
         const isPasswordValid = await (0, password_1.comparePassword)(password, user.password);
         if (!isPasswordValid) {
             return res.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({
-                message: "Invalid email or password",
+                message: "Invalid email or password 2",
             });
         }
         // Generate a JWT token

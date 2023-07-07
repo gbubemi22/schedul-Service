@@ -11,7 +11,7 @@ router
     .post(companyController_1.default.addCompany)
     .get(companyController_1.default.getAllCompanies);
 router
-    .route('/:id')
+    .route('/:companyId')
     .get(companyController_1.default.getOneCompany)
     .patch(companyController_1.default.updateCompany)
     .delete(companyController_1.default.deleteCompany);
