@@ -64,3 +64,21 @@ Conclusion
 By following this documentation, you should be able to use the NoemDAK app to get information about drivers, clients, companies, vehicles, and their statuses. You can also create schedules as an admin and filter schedules by drivers, vehicles, day, week, or month.
 
 Please note that there is currently no authentication and authorization implemented, so the endpoints can be accessed freely. If you have any questions or feedback, please don't hesitate to contact us.
+
+
+REASON FOR USING POSTGRES
+
+
+    Relational Database: PostgreSQL is a powerful and feature-rich open-source relational database management system (RDBMS). If your project requires structured data with relationships between tables, PostgreSQL's relational model can provide the necessary flexibility and organization.
+
+    Robustness and Stability: PostgreSQL is known for its stability and reliability. It has a reputation for being a solid choice for enterprise-level applications due to its ability to handle large amounts of data and high transaction volumes. It also has a strong focus on data integrity and offers features like ACID (Atomicity, Consistency, Isolation, Durability) compliance.
+
+    Advanced Features: PostgreSQL offers a wide range of advanced features and capabilities that can support complex database requirements. Some notable features include support for JSON and JSONB data types, full-text search, spatial data types and operations, advanced indexing options, and stored procedures with multiple languages (such as PL/pgSQL, PL/Python, and more).
+
+    Extensibility and Flexibility: PostgreSQL is highly extensible, allowing you to add custom data types, operators, and functions to meet specific project needs. It also provides support for various data types, including numeric, text, date/time, network addresses, arrays, and more. Additionally, PostgreSQL supports a rich set of SQL features, making it versatile for different types of projects.
+
+    Community and Ecosystem: PostgreSQL has a large and active open-source community that continually works on improving the database system. This community ensures regular updates, bug fixes, and security patches, providing long-term support for your project. Furthermore, PostgreSQL has a wide range of libraries, tools, and frameworks that integrate well with it, making development and maintenance easier.
+
+    Cross-Platform Compatibility: PostgreSQL is cross-platform and can run on various operating systems, including Windows, macOS, Linux, and UNIX-like systems. This flexibility allows you to develop and deploy your project on different environments, depending on your specific requirements.
+
+    Cost-Effectiveness: PostgreSQL is open-source and free to use, making it a cost-effective choice for projects with budget constraints. It eliminates licensing costs typically associated with proprietary database systems.
