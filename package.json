@@ -9,7 +9,7 @@
     "start": "node dist/app.js",
     "dev": "npm run build && nodemon dist/app.js"
   },
-  "author": "",
+  "author": "gbubemi22 <slimnfine22@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.3.3",
@@ -52,6 +52,7 @@
     "xss-clean": "^0.1.4"
   },
   "engines": {
-    "node": "14.0.0"
-  }
+    "node": "20"
+  },
+  "repository": "https://github.com/gbubemi22/schedul-Service.git"
 }
