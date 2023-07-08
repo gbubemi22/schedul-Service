@@ -52,6 +52,6 @@
     "xss-clean": "^0.1.4"
   },
   "engines": {
-    "node": "18x"
+    "node": "14x"
   }
 }
